@@ -1,4 +1,4 @@
-package com.bruis.api.order.config;
+package com.bruis.api.gateway.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -29,10 +29,13 @@ public class ResourceServerConfigure extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .requestMatchers().antMatchers("/**")
-                .and()
+                //.requestMatchers().antMatchers("/**")
+                //.and()
                 .authorizeRequests()
-                .antMatchers("/**").authenticated();
+                .antMatchers("/api/**").authenticated()
+                .antMatchers("/webjars/**", "/resources/**", "/swagger-ui.html"
+                        , "/swagger-resources/**", "/v2/api-docs", "index.html").permitAll()
+                .anyRequest().authenticated();
     }
 
     @Override
