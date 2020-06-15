@@ -7,9 +7,11 @@ import com.bruis.api.service.ProductService;
  * @author LuoHaiYang
  */
 //@Service
-public class ProductServiceImpl implements ProductService {
+public class ProductServiceImpl /*implements ProductService*/ {
+/*
     @Override
     public String getProductName(Integer productId) {
         return "Dubbo: " + productId;
     }
+*/
 }

@@ -3,16 +3,14 @@ package com.bruis.api.gateway.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.bruis.api.service.OrderService;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author LuoHaiYang
  */
 @RestController
 @RequestMapping("/order")
+@CrossOrigin(origins = {"*"}, allowCredentials = "true")
 public class OrderController {
 
     @Reference

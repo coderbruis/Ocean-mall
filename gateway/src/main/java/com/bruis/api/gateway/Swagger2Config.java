@@ -26,7 +26,7 @@ public class Swagger2Config {
     private static final String TITLE = "分布式电商网关服务接口文档";
     private static final String DESCRIPTION = "接口文档";
     private static final String BASEPACKAGE = "com.bruis.api.gateway.controller";
-    private static final String SERVICE_URL = "http://127.0.0.1:8902";
+    private static final String SERVICE_URL = "http://localhost:8902";
 
     private static final String CLIENT_ID = "swagger";
     private static final String CLIENT_SECRET = "123456";
@@ -62,7 +62,7 @@ public class Swagger2Config {
      * @return
      */
     private SecurityScheme securityScheme() {
-        GrantType grantType = new ResourceOwnerPasswordCredentialsGrant("http://127.0.0.1:8902/oauth/token");
+        GrantType grantType = new ResourceOwnerPasswordCredentialsGrant("http://dubbo-swagger.cn");
         return new OAuthBuilder()
                 .name("OAuth2")
                 .grantTypes(Collections.singletonList(grantType))
