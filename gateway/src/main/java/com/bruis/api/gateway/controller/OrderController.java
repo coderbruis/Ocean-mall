@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/order")
-@CrossOrigin(origins = {"*"}, allowCredentials = "true")
 public class OrderController {
 
     @Reference

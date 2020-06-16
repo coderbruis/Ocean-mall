@@ -63,6 +63,7 @@ public class Swagger2Config {
      */
     private SecurityScheme securityScheme() {
         GrantType grantType = new ResourceOwnerPasswordCredentialsGrant("http://dubbo-swagger.cn");
+        //GrantType grantType = new ResourceOwnerPasswordCredentialsGrant("http://localhost:8902/oauth/token");
         return new OAuthBuilder()
                 .name("OAuth2")
                 .grantTypes(Collections.singletonList(grantType))
