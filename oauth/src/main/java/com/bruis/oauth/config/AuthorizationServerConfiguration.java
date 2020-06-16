@@ -59,11 +59,16 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     /**
      * 配置客户端对应授权方式及客户端密码
      * 当前使用内存模式
+     *
+     * withClient + secret需要进行base64为加密：
+     *
+     * 明文：bruis:123456    BASE64：
+     *
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient("febs")
+                .withClient("bruis")
                 .secret(passwordEncoder.encode("123456"))
                 .authorizedGrantTypes("password", "refresh_token")
                 .scopes("all");

@@ -3,6 +3,7 @@ package com.bruis.api.gateway.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.bruis.api.service.OrderService;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**

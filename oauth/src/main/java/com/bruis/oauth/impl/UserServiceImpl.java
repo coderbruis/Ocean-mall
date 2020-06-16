@@ -3,6 +3,7 @@ package com.bruis.oauth.impl;
 import com.alibaba.fastjson.JSON;
 import com.bruis.common.model.dataObject.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,6 +31,7 @@ public class UserServiceImpl implements UserDetailsService {
         UserDTO userDTO = new UserDTO();
         // 为了增强jwt令牌内容，可以将整个对象转json存放到username中
         userDTO.setUsername(JSON.toJSONString(user));
+        userDTO.setAuthorities(AuthorityUtils.commaSeparatedStringToAuthorityList("user:add"));
 
         userDTO.setPassword(passwordEncoder.encode("123"));
 

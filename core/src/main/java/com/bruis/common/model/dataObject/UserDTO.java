@@ -4,6 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author LuoHaiYang
@@ -19,6 +20,8 @@ public class UserDTO implements UserDetails {
     public String phone;
 
     public int status;
+
+    public List<GrantedAuthority> authorities;
 
     public UserDTO() {}
 
@@ -64,11 +67,13 @@ public class UserDTO implements UserDetails {
         this.status = status;
     }
 
-
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
+    }
+
+    public void setAuthorities(List<GrantedAuthority> authorities) {
+        this.authorities = authorities;
     }
 
     @Override
