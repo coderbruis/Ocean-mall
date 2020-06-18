@@ -28,19 +28,10 @@ public class Swagger2Config {
     private static final String BASEPACKAGE = "com.bruis.api.gateway.controller";
     private static final String SERVICE_URL = "http://localhost:8902";
 
-    private static final String CLIENT_ID = "swagger";
-    private static final String CLIENT_SECRET = "123456";
-    private static final String GRANT_TYPE = "password";
-    private static final String SCOPE = "test";
-
-
     @Bean
     public Docket createRestApi(){
         return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
-//                .enable(true)
                 .select()
-                // 所有ApiOperation注解的方法，生成接口文档
-                //.apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .apis(RequestHandlerSelectors.basePackage(BASEPACKAGE))
                 .paths(PathSelectors.any())
                 .build()
