@@ -7,6 +7,7 @@ import com.bruis.api.service.ProductService;
 import com.bruis.common.model.dataObject.UserDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -46,10 +47,12 @@ public class SystemController {
 
     @ApiOperation("测试Dubbo远程调用")
     @GetMapping("/user/getOrder/{orderId}")
+    @PreAuthorize("hasAuthority('ROLE_MEDIUM2')")
     public String getOrder(@PathVariable("orderId") Integer orderId) {
         return productService.getProductName(222);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_MEDIUM')")
     @ApiOperation("根据产品名称获取订单号")
     @GetMapping("/getOrderId/{productName}")
     public String getOrderId(@PathVariable("productName") String productName) {

@@ -18,6 +18,7 @@ public class OrderController {
 
     @ApiOperation("根据产品名称获取订单号")
     @GetMapping("/getOrderId/{productName}")
+    @PreAuthorize("hasAuthority('user:write')")
     public String getOrderId(@PathVariable("productName") String productName) {
         return orderService.getOrderId(productName);
     }

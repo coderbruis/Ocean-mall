@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserDetailsService {
         UserDTO userDTO = new UserDTO();
         // 为了增强jwt令牌内容，可以将整个对象转json存放到username中
         userDTO.setUsername(JSON.toJSONString(user));
-        userDTO.setAuthorities(AuthorityUtils.commaSeparatedStringToAuthorityList("user:add"));
+        userDTO.setAuthorities(AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_NORMAL,ROLE_MEDIUM, user:select"));
 
         userDTO.setPassword(passwordEncoder.encode("123"));
 
