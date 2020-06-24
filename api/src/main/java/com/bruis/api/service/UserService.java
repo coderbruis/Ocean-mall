@@ -1,6 +1,6 @@
 package com.bruis.api.service;
 
-import com.bruis.common.model.dataObject.User;
+import com.bruis.common.portal.model.entity.User;
 
 /**
  * @author LuoHaiYang

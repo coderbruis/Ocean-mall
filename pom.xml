@@ -12,6 +12,7 @@
         <module>core</module>
         <module>api</module>
         <module>oauth</module>
+        <module>backend</module>
     </modules>
 
 
@@ -122,6 +123,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- mysql -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.11</version>
         </dependency>
 
     </dependencies>

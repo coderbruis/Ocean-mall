@@ -1,6 +1,6 @@
 package com.bruis.api.product.service.dao;
 
-import com.bruis.common.model.dataObject.Product;
+import com.bruis.common.portal.model.entity.Product;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.bruis.common.model.dataObject;
+package com.bruis.common.portal.model.dto;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,4 +1,4 @@
-package com.bruis.common.model.dataObject;
+package com.bruis.common.portal.model.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
