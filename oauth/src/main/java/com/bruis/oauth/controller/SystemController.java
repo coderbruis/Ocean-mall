@@ -2,6 +2,7 @@ package com.bruis.oauth.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.bruis.api.service.OrderService;
 import com.bruis.api.service.ProductService;
 import com.bruis.common.portal.model.dto.UserDTO;
@@ -88,6 +89,25 @@ public class SystemController {
         // SecurityContextHolder 和 OAuth2Authentication都可以获取当前用户信息
         Authentication auth =  SecurityContextHolder.getContext().getAuthentication();
         return "获取到了用户资源："+ddo.getUsername()+"------"+ddo.getUsername()+"----"+ddo.getPhone();
+    }
+
+    /**
+     *
+     * @return
+     */
+    @GetMapping("/getUserInfo")
+    public Object getUserInfo() {
+        String[] roles = {"admin"};
+        String introduction = "I am a super administrator";
+        String avator = "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif";
+        String name = "Super Admin";
+        JSONObject result = new JSONObject();
+        result.put("roles", roles);
+        result.put("introduction", introduction);
+        result.put("avatar", avator);
+        result.put("name", name);
+        result.put("code", 20000);
+        return result;
     }
 
 }

@@ -33,11 +33,11 @@ public class UserServiceImpl implements UserDetailsService {
 
         //return loadFromDB(s);
         Map<String, String> userMap = new HashMap<>();
-        userMap.put("admin", passwordEncoder.encode("123"));
+        userMap.put("admin", passwordEncoder.encode("123456789"));
         if (userMap.containsKey(s)) {
             UserDTO userDTOReturn = new UserDTO();
-            userDTO.setAuthorities(AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_NORMAL,ROLE_MEDIUM, user:select"));
-            userDTO.setPassword(passwordEncoder.encode("123"));
+            userDTOReturn.setAuthorities(AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_NORMAL,ROLE_MEDIUM, user:select"));
+            userDTOReturn.setPassword(passwordEncoder.encode("123456789"));
             return userDTOReturn;
         }
         throw new UsernameNotFoundException("Username Not Found.");
