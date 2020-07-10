@@ -1,4 +1,5 @@
-# dubboproject
+# Distributed-mall
+
 通过SpringBoot2+Dubbo+Oauth2+Swagger构建的分布式电商后端
 
 ## 项目版本详情
@@ -12,4 +13,9 @@
 ### 分支v0.0.2
 
 接入整合MyBatis，数显数据落库持久化，实现用户登录、权限控制、个人信息持久化等。
+
+
+## 支持
+
+开发不易，各位小哥哥小姐姐们star支持下吧。
 
