@@ -39,8 +39,10 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/users/**").authenticated() //配置users访问控制，必须认证过后才可以访问
-                .antMatchers("/test/**").permitAll() //配置test无须认证，可以匿名访问
+                //配置users访问控制，必须认证过后才可以访问
+                .antMatchers("/users/**").authenticated()
+                //配置test无须认证，可以匿名访问
+                .antMatchers("/test/**").permitAll()
                 .antMatchers("/webjars/**", "/resources/**", "/swagger-ui.html"
                         , "/swagger-resources/**", "/v2/api-docs", "index.html").permitAll()
                 .anyRequest().authenticated();

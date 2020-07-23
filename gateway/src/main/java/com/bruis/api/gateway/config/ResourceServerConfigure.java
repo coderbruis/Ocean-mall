@@ -28,6 +28,7 @@ public class ResourceServerConfigure extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
+        // 警用csrf，使用跨域
         http.csrf().disable()
                 //.requestMatchers().antMatchers("/**")
                 //.and()
