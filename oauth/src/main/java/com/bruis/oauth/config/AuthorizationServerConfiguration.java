@@ -38,6 +38,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     private static final String JWT_SIGNING_KEY = "jwt_MC43A6m0Xt9jUIV";
 
     /**
+     * 配置为密码模式时需要注入认证管理器
      * 认证方式
      */
     @Autowired
@@ -78,10 +79,13 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         endpoints.tokenStore(tokenStore())
                 .authenticationManager(authenticationManager)
                 .accessTokenConverter(accessTokenConverter())
-                .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)  //支持GET  POST  请求获取token
-                .userDetailsService(userDetailsService) //必须注入userDetailsService否则根据refresh_token无法加载用户信息
-//                .exceptionTranslator(customWebResponseExceptionTranslator)
-                .reuseRefreshTokens(true);  //开启刷新token
+                //支持GET  POST  请求获取token
+                .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
+                //必须注入userDetailsService否则根据refresh_token无法加载用户信息
+                .userDetailsService(userDetailsService)
+                //.exceptionTranslator(customWebResponseExceptionTranslator)
+                //开启刷新token
+                .reuseRefreshTokens(true);
     }
 
     /**
@@ -94,8 +98,10 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security
                 .tokenKeyAccess("permitAll()")
-                .checkTokenAccess("isAuthenticated()") //isAuthenticated():排除anonymous   isFullyAuthenticated():排除anonymous以及remember-me
-                .allowFormAuthenticationForClients();  //允许表单认证
+                //isAuthenticated():排除anonymous   isFullyAuthenticated():排除anonymous以及remember-me
+                .checkTokenAccess("isAuthenticated()")
+                //允许表单认证
+                .allowFormAuthenticationForClients();
     }
 
 

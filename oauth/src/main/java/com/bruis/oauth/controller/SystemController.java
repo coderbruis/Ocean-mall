@@ -9,6 +9,7 @@ import com.bruis.common.portal.model.dto.UserDTO;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -71,7 +72,10 @@ public class SystemController {
     }
 
     @GetMapping("user")
-    public Principal currentUser(Principal principal) {
+    public Principal currentUser(@AuthenticationPrincipal Principal principal) {
+        Authentication authentication = (Authentication) principal;
+        UserDTO user = (UserDTO) authentication.getPrincipal();
+        System.out.println(user);
         return principal;
     }
 
