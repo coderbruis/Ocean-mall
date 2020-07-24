@@ -27,6 +27,8 @@ public class Swagger2Config {
     private static final String DESCRIPTION = "接口文档";
     private static final String BASEPACKAGE = "com.bruis.api.gateway.controller";
     private static final String SERVICE_URL = "http://localhost:8902";
+    // private static final String OAUTH_TOKEN_URI = "http://localhost:8902/oauth/token";
+    private static final String OAUTH_TOKEN_URI = "http://dubbo-swagger.cn";
 
     @Bean
     public Docket createRestApi(){
@@ -53,8 +55,8 @@ public class Swagger2Config {
      * @return
      */
     private SecurityScheme securityScheme() {
-        GrantType grantType = new ResourceOwnerPasswordCredentialsGrant("http://dubbo-swagger.cn");
-        //GrantType grantType = new ResourceOwnerPasswordCredentialsGrant("http://localhost:8902/oauth/token");
+        // GrantType grantType = new ResourceOwnerPasswordCredentialsGrant("http://dubbo-swagger.cn");
+        GrantType grantType = new ResourceOwnerPasswordCredentialsGrant(OAUTH_TOKEN_URI);
         return new OAuthBuilder()
                 .name("OAuth2")
                 .grantTypes(Collections.singletonList(grantType))

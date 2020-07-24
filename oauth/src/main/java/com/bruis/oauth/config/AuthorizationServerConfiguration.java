@@ -69,21 +69,23 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         clients.inMemory()
                 .withClient("bruis")
                 .secret(passwordEncoder.encode("123456"))
-                .authorizedGrantTypes("password", "refresh_token")
-                .scopes("all");
+                .authorizedGrantTypes("authorization_code","password", "refresh_token")
+                .scopes("all")
+                .redirectUris("http://www.baidu.com");
     }
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.tokenStore(tokenStore())
+                // 配置密码模式需要制定认证器
                 .authenticationManager(authenticationManager)
                 .accessTokenConverter(accessTokenConverter())
-                //支持GET  POST  请求获取token
+                // 支持GET  POST  请求获取token
                 .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
-                //必须注入userDetailsService否则根据refresh_token无法加载用户信息
+                // 必须注入userDetailsService否则根据refresh_token无法加载用户信息
                 .userDetailsService(userDetailsService)
-                //.exceptionTranslator(customWebResponseExceptionTranslator)
-                //开启刷新token
+                // .exceptionTranslator(customWebResponseExceptionTranslator)
+                // 开启刷新token
                 .reuseRefreshTokens(true);
     }
 
@@ -109,7 +111,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
      */
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() {
+        // 使用OAuth2默认的JwtAccessTokenConverter
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        // 密钥加强
         converter.setSigningKey(JWT_SIGNING_KEY);
         return converter;
     }
@@ -130,7 +134,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
      * token认证服务
      */
     @Bean
-    public ResourceServerTokenServices tokenService() {
+public ResourceServerTokenServices tokenService() {
         // 授权服务和资源服务在统一项目内，可以使用本地认证方式，如果再不同工程，需要使用远程认证方式
         DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
         defaultTokenServices.setTokenStore(tokenStore());
