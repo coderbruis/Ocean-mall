@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -13,12 +14,15 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
+import javax.sql.DataSource;
 import java.util.UUID;
 
 
@@ -30,6 +34,8 @@ import java.util.UUID;
  */
 @Configuration
 @EnableAuthorizationServer
+// 开启权限控制
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
     /**
@@ -55,6 +61,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     @Autowired
     private RedisConnectionFactory redisConnectionFactory;
 
+    @Autowired
+    private DataSource dataSource;
+
     /**
      * 配置客户端对应授权方式及客户端密码
      * 当前使用内存模式
@@ -66,12 +75,18 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        // 从数据库中读取客户端配置
+        clients.withClientDetails(jdbcClientDetailsService());
+/*
         clients.inMemory()
                 .withClient("bruis")
                 .secret(passwordEncoder.encode("123456"))
                 .authorizedGrantTypes("authorization_code","password", "refresh_token")
                 .scopes("all")
                 .redirectUris("http://www.baidu.com");
+*/
+                // 关闭授权确认步骤
+                //.autoApprove(false);
     }
 
     @Override
@@ -134,12 +149,20 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
      * token认证服务
      */
     @Bean
-public ResourceServerTokenServices tokenService() {
+    public ResourceServerTokenServices tokenService() {
         // 授权服务和资源服务在统一项目内，可以使用本地认证方式，如果再不同工程，需要使用远程认证方式
         DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
         defaultTokenServices.setTokenStore(tokenStore());
         defaultTokenServices.setSupportRefreshToken(true);
         return defaultTokenServices;
+    }
+
+    @Bean
+    public ClientDetailsService jdbcClientDetailsService() {
+        // 基于JDBC实现，需要实现在数据库配置客户端信息以及密码加密方式
+        JdbcClientDetailsService detailsService = new JdbcClientDetailsService(dataSource);
+        detailsService.setPasswordEncoder(passwordEncoder);
+        return detailsService;
     }
 
 }

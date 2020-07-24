@@ -30,6 +30,12 @@ public class UserDTO implements UserDetails {
         this.password = password;
     }
 
+    public UserDTO(String username, String password, List<GrantedAuthority> authorities) {
+        this.username = username;
+        this.password = password;
+        this.authorities = authorities;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }

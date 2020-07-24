@@ -17,6 +17,7 @@ public class OrderController {
 
     @GetMapping("/user/getOrder/{orderId}")
     public String getOrder(@PathVariable("orderId") Integer orderId) {
-        return productService.getProductName(orderId);
+        // return productService.getProductName(orderId);
+        return "Test getOder()";
     }
 }

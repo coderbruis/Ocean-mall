@@ -21,8 +21,6 @@ public class ProductController {
 
     @ApiOperation("根据产品编号取产品名称")
     @GetMapping("/getProductName/{productId}")
-    //@PreAuthorize("hasAuthority('ROLE_MEDIUM')")
-    @PreAuthorize("hasRole('ROLE_MEDIUM')")
     public String getProductName(@PathVariable("productId") Integer productId) {
         return productService.getProductName(productId);
     }
