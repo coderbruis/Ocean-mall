@@ -29,7 +29,7 @@ import java.util.UUID;
 /**
  * @author LuoHaiYang
  *
- * 开启授权服务器
+ * 开启认证服务器
  *
  */
 @Configuration
