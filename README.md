@@ -8,12 +8,17 @@
 
 项目构建，整合SpringBoo2+Dubbo+OAuth2+Swagger2，实现基础框架构建。
 
-- [实战Dubbo+SpringBoot+Oauth2+Swagger2构建的带权限认证的分布式电商后端系统（一）](https://blog.csdn.net/CoderBruis/article/details/106827850)
+- [实战分布式电商后端系统（一）—— 项目搭建以及Dubbo+SpringBoot+Oauth2+Swagger2的集成](https://blog.csdn.net/CoderBruis/article/details/106827850)
+- [实战分布式电商后端系统（二）—— 将OAuth2认证和权限信息存入MySQL数据库](https://blog.csdn.net/CoderBruis/article/details/107564953)
 
 ### 分支v0.0.2
 
-接入整合MyBatis，数显数据落库持久化，实现用户登录、权限控制、个人信息持久化等。
+代码优化
 
+### 分支v0.0.3
+
+- 接入整合tk.MyBatis，让认证客户端以及权限等数据落库持久化。
+- 并对接前端基于Vue实现的Distributed-mall-admin，实现登录以及菜单路由等基础功能。
 
 ## 支持
 
