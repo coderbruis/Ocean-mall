@@ -28,7 +28,7 @@ public class Swagger2Config {
     private static final String BASEPACKAGE = "com.bruis.api.gateway.controller";
     private static final String SERVICE_URL = "http://localhost:8902";
     // private static final String OAUTH_TOKEN_URI = "http://localhost:8902/oauth/token";
-    private static final String OAUTH_TOKEN_URI = "http://dubbo-swagger.cn";
+    private static final String OAUTH_TOKEN_URI = "http://www.distributed_mall_oauth.cn/oauth/token";
 
     @Bean
     public Docket createRestApi(){
