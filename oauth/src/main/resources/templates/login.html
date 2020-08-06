@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<form th:action="@{/login}" method="post">
+    <input type="text" name="username" value="" placeholder="E-mail address" >
+    <input type="password" name="password" value="" placeholder="Password">
+    <div><input type="submit" value="Login" ></div>
+    <div></div>
+</form>
+</body>
+</html>

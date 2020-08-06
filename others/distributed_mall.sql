@@ -11,7 +11,7 @@
  Target Server Version : 50710
  File Encoding         : 65001
 
- Date: 25/07/2020 09:00:48
+ Date: 06/08/2020 14:45:49
 */
 
 SET NAMES utf8mb4;
@@ -94,7 +94,10 @@ CREATE TABLE `oauth_client_details` (
 -- Records of oauth_client_details
 -- ----------------------------
 BEGIN;
-INSERT INTO `oauth_client_details` VALUES ('client', NULL, '$2a$10$r0g/vsua5ohX/pi4Wo561O9cX2.oKe4ctJvaPl6rQRYZJ8rM8D0xW', 'app', 'authorization_code,password', 'http://www.baidu.com', NULL, NULL, NULL, NULL, 'false');
+INSERT INTO `oauth_client_details` VALUES ('client', NULL, '$2a$10$r0g/vsua5ohX/pi4Wo561O9cX2.oKe4ctJvaPl6rQRYZJ8rM8D0xW', 'app', 'authorization_code,password', 'http://localhost:8903/user/getOrder/1', NULL, NULL, NULL, NULL, 'false');
+INSERT INTO `oauth_client_details` VALUES ('gateway', NULL, '$2a$10$8BX5Oob0DBVDlnZsTG/TQ.4QnzZlR5N.PB417xYeh8S8OzDE9kMZ.', 'all', 'authorization_code', 'http://localhost:8901/login', NULL, NULL, NULL, NULL, 'false');
+INSERT INTO `oauth_client_details` VALUES ('order', NULL, '$2a$10$8BX5Oob0DBVDlnZsTG/TQ.4QnzZlR5N.PB417xYeh8S8OzDE9kMZ.', 'user_info', 'authorization_code,password', 'http://localhost:8903/login', NULL, NULL, NULL, NULL, 'user_info');
+INSERT INTO `oauth_client_details` VALUES ('product', NULL, '$2a$10$8BX5Oob0DBVDlnZsTG/TQ.4QnzZlR5N.PB417xYeh8S8OzDE9kMZ.', 'user_info', 'authorization_code', 'http://localhost:8904/login', NULL, NULL, NULL, NULL, 'user_info');
 COMMIT;
 
 -- ----------------------------
@@ -224,6 +227,8 @@ CREATE TABLE `tb_user` (
   `email` varchar(50) DEFAULT NULL COMMENT '注册邮箱',
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
+  `avatar` varchar(255) DEFAULT NULL COMMENT '头像',
+  `introduction` varchar(255) DEFAULT NULL COMMENT '个人介绍',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`) USING BTREE,
   UNIQUE KEY `phone` (`phone`) USING BTREE,
@@ -234,7 +239,7 @@ CREATE TABLE `tb_user` (
 -- Records of tb_user
 -- ----------------------------
 BEGIN;
-INSERT INTO `tb_user` VALUES (37, 'admin', '$2a$10$xTvic9aNdopwgyXCYb13zOAbXEZ4tX5kevEoLFOP8n7evNGmYm/2K', '15888888888', 'lee.lusifer@gmail.com', '2019-04-04 23:21:27', '2019-04-04 23:21:29');
+INSERT INTO `tb_user` VALUES (37, 'admin', '$2a$10$xTvic9aNdopwgyXCYb13zOAbXEZ4tX5kevEoLFOP8n7evNGmYm/2K', '15888888888', 'lee.lusifer@gmail.com', '2019-04-04 23:21:27', '2019-04-04 23:21:29', 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif', 'I am administrator!');
 COMMIT;
 
 -- ----------------------------

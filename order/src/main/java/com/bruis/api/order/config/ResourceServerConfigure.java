@@ -13,10 +13,11 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
 /**
  * @author LuoHaiYang
  */
-@Configuration
-@EnableResourceServer
-public class ResourceServerConfigure extends ResourceServerConfigurerAdapter {
+//@Configuration
+//@EnableResourceServer
+public class ResourceServerConfigure /*extends ResourceServerConfigurerAdapter*/ {
 
+/*
     @Autowired
     private RedisConnectionFactory redisConnectionFactory;
 
@@ -39,4 +40,5 @@ public class ResourceServerConfigure extends ResourceServerConfigurerAdapter {
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         resources.tokenStore(tokenStore());
     }
+*/
 }

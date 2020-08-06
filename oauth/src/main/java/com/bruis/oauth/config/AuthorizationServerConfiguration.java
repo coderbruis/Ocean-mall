@@ -34,8 +34,6 @@ import java.util.UUID;
  */
 @Configuration
 @EnableAuthorizationServer
-// 开启权限控制
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
     /**
@@ -77,30 +75,16 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         // 从数据库中读取客户端配置
         clients.withClientDetails(jdbcClientDetailsService());
-/*
-        clients.inMemory()
-                .withClient("bruis")
-                .secret(passwordEncoder.encode("123456"))
-                .authorizedGrantTypes("authorization_code","password", "refresh_token")
-                .scopes("all")
-                .redirectUris("http://www.baidu.com");
-*/
-                // 关闭授权确认步骤
-                //.autoApprove(false);
     }
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        //endpoints.accessTokenConverter(accessTokenConverter()).tokenStore(tokenStore());
         endpoints.tokenStore(tokenStore())
-                // 配置密码模式需要制定认证器
                 .authenticationManager(authenticationManager)
                 .accessTokenConverter(accessTokenConverter())
-                // 支持GET  POST  请求获取token
-                .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
-                // 必须注入userDetailsService否则根据refresh_token无法加载用户信息
+                .allowedTokenEndpointRequestMethods(HttpMethod.POST, HttpMethod.GET)
                 .userDetailsService(userDetailsService)
-                // .exceptionTranslator(customWebResponseExceptionTranslator)
-                // 开启刷新token
                 .reuseRefreshTokens(true);
     }
 
@@ -112,12 +96,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
      */
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security
-                .tokenKeyAccess("permitAll()")
-                //isAuthenticated():排除anonymous   isFullyAuthenticated():排除anonymous以及remember-me
-                .checkTokenAccess("isAuthenticated()")
-                //允许表单认证
-                .allowFormAuthenticationForClients();
+        security.allowFormAuthenticationForClients().tokenKeyAccess("isAuthenticated()");
     }
 
 
